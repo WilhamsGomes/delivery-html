@@ -57,6 +57,12 @@
             list-style: none;
             gap: 10px;
 
+            @media screen and (max-width: 560px) {
+                li:not(#open-cart) {
+                    display: none;
+                }
+            }
+
         }
 
         header ul li {
@@ -78,7 +84,6 @@
             height: 20px;
         }
 
-        /* Header após rolagem */
         header.scrolled {
             background-color: #ff4156;
             color: white;
@@ -202,8 +207,8 @@
             padding: 0;
 
             @media screen and (max-width: 700px) {
-               flex-direction: column;
-               gap: 20px;
+                flex-direction: column;
+                gap: 20px;
             }
         }
 
@@ -323,6 +328,7 @@
                         <option value="pix">Pix</option>
                         <option value="dinheiro">Dinheiro</option>
                     </select>
+                    <p><strong>*Pagamento será feito na entrega.</strong></p>
 
                     <label for="client-name">Nome completo:</label>
                     <input type="text" id="client-name" placeholder="Seu nome completo" required />
@@ -330,7 +336,7 @@
                     <label for="client-address">Endereço de entrega:</label>
                     <input type="text" id="client-address" placeholder="Rua, número, bairro..." required />
 
-                    <p><strong>Pagamento será feito na entrega.</strong></p>
+
 
                     <button id="confirmar-checkout" type="button">Confirmar Pedido</button>
                 </form>
@@ -350,7 +356,6 @@
                 </div>
             </div>
         </section>
-
 
         <header>
             <h3>UNI Food</h3>
@@ -497,7 +502,6 @@
                 </div>
             </div>
         </section>
-
 
         <section id="categories">
             <div class="header-categories">

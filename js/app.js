@@ -49,6 +49,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (existingItem.quantidade <= 0) {
           const index = carrinho.findIndex((item) => item.title === title);
           carrinho.splice(index, 1);
+          restaurarBotaoAdicionar(card);
+        } else {
+          atualizarBotaoQuantidade(card, existingItem.quantidade); // 👈 atualiza visual
         }
       }
 
@@ -72,6 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const existingItem = carrinho.find((item) => item.title === title);
       if (existingItem) {
         existingItem.quantidade += 1;
+        atualizarBotaoQuantidade(card, existingItem.quantidade);
       } else {
         carrinho.push({ title, price, image, quantidade: 1 });
       }
@@ -179,8 +183,8 @@ document.addEventListener("DOMContentLoaded", function () {
       div.innerHTML = `
         <img src="${item.image}" alt="${item.title}">
         <div class="info">
-          <span class="title">${item.title}</span>
           <span class="quantity-price">
+            <span class="title">${item.title}</span>
             <button class="cart-qty-btn" data-title="${item.title}" data-action="decrease">−</button>
             ${item.quantidade}
             <button class="cart-qty-btn" data-title="${item.title}" data-action="increase">+</button>
@@ -201,18 +205,21 @@ document.addEventListener("DOMContentLoaded", function () {
         const title = e.target.getAttribute("data-title");
         const action = e.target.getAttribute("data-action");
         const item = carrinho.find((i) => i.title === title);
-
+    
         if (item) {
           item.quantidade += action === "increase" ? 1 : -1;
           if (item.quantidade <= 0) {
             const idx = carrinho.findIndex((i) => i.title === title);
             carrinho.splice(idx, 1);
           }
-          renderCarrinho();
+    
           sincronizarCards();
+          renderCarrinho();
+          atualizarContadorCarrinho();
         }
       });
     });
+    
 
     // Remover item
     document.querySelectorAll(".remove-item").forEach((btn) => {
@@ -221,18 +228,18 @@ document.addEventListener("DOMContentLoaded", function () {
         const index = carrinho.findIndex((i) => i.title === title);
         if (index >= 0) {
           carrinho.splice(index, 1);
-          renderCarrinho();
           sincronizarCards();
+          renderCarrinho();
           atualizarContadorCarrinho();
         }
       });
     });
 
-    atualizarContadorCarrinho();
+    
   }
 
   function sincronizarCards() {
-    document.querySelectorAll("#all-foods .card").forEach((card) => {
+    document.querySelectorAll(".card").forEach((card) => {
       const title = card.querySelector(".title").textContent;
       const content = card.querySelector(".content");
       const carrinhoItem = carrinho.find((item) => item.title === title);

@@ -27,6 +27,10 @@
   margin-top: 0;
 }
 
+#cart-items {
+  width: 100%;
+}
+
 #cart-items .cart-item {
   display: flex;
   align-items: center;
@@ -47,6 +51,11 @@
 .cart-item .info {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+}
+
+.cart-item .unit-price {
+  font-size: 12px;
 }
 
 .cart-item .info .title {

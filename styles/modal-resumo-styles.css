@@ -17,14 +17,17 @@
 
 #modal-resumo .modal-content {
   background: white;
-  padding: 30px;
   border-radius: 12px;
-  max-width: 450px;
-  width: 90%;
+  max-width: 550px;
+  width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+#resumo-conteudo {
+  width: 100%;
 }
 
 #resumo-conteudo p {
@@ -33,6 +36,7 @@
 }
 
 .resumo-buttons {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   gap: 10px;
