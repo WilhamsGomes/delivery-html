@@ -1,0 +1,39 @@
+#categories {
+  text-align: center;
+  padding: 0px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+
+.header-categories {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  span {
+      color: #ff4156;
+      font-weight: bold;
+      cursor: pointer;
+  }
+}
+
+.categories-items {
+
+  span {
+    padding: 10px 20px;
+    background: #FFF;
+    border-radius: 40px;
+    cursor: pointer
+  }
+
+  .category-active {
+    background: #ff4156;
+    color: #fff;
+  }
+}
+

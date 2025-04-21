@@ -1,0 +1,10 @@
+#all-foods {
+  margin-top: 20px;
+}
+
+#cards-food {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}

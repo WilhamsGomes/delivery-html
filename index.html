@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./styles/card-styles.css">
+    <link rel="stylesheet" href="./styles/categories-styles.css">
+    <link rel="stylesheet" href="./styles/all-foods.css">
+    <link rel="stylesheet" href="./styles/cart-styles.css">
+    <link rel="stylesheet" href="./styles/checkout-styles.css">
+    <link rel="stylesheet" href="./styles/modal-resumo-styles.css">
+    <title>Fast Food</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins";
+
+        }
+
+        body {
+            background-color: #f8f8f8;
+            position: relative;
+        }
+
+        main {
+            position: relative;
+            padding: 5px 30px;
+
+        }
+
+        header {
+            background-color: f8f8f8;
+            color: #ff4156;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+            padding: 0px 40px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header ul {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+
+        }
+
+        header ul li {
+            cursor: pointer;
+            color: #ff4156;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 14px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        header ul li img {
+            filter: invert(36%) sepia(95%) saturate(682%) hue-rotate(329deg) brightness(102%) contrast(105%);
+            transition: filter 0.3s;
+            width: 22px;
+            height: 20px;
+        }
+
+        /* Header após rolagem */
+        header.scrolled {
+            background-color: #ff4156;
+            color: white;
+        }
+
+        header.scrolled ul li {
+            color: white;
+        }
+
+        header.scrolled ul li img {
+            filter: invert(100%);
+        }
+
+        .cart-badge {
+            background-color: #f1c40f;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            position: absolute;
+            left: 10%;
+            top: -50%;
+        }
+
+
+        #home {
+            width: 100%;
+            height: 600px;
+            border-radius: 10px;
+            margin-top: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wrapper-image {
+            width: 50%;
+
+            @media screen and (max-width: 700px) {
+                display: none;
+            }
+
+        }
+
+        .wrapper-image img {
+            width: 100%;
+        }
+
+        .cta-home {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 40px;
+
+            @media screen and (max-width: 700px) {
+                width: 100%;
+            }
+        }
+
+        .cta-home span {
+            width: 220px;
+            height: 40px;
+            background: #ffd5da;
+            color: #ff4156;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 40px;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            font-size: 14px;
+        }
+
+        .title-cta {
+            font-size: 62px;
+            line-height: 100%;
+        }
+
+        .description-cta {
+            font-size: 16px;
+            color: rgb(84, 84, 84);
+        }
+
+        .actions-home {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .actions-home button {
+            width: 120px;
+            height: 40px;
+            border-radius: 40px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .actions-menu {
+            background: #ff4156;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .actions-order {
+            background: #fcd9d9;
+        }
+
+        #characteristics {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 0;
+
+            @media screen and (max-width: 700px) {
+               flex-direction: column;
+               gap: 20px;
+            }
+        }
+
+        .card-characteristics {
+            width: calc(100% / 3);
+            height: 180px;
+            background: #ff4156;
+            border-radius: 10px;
+            font-size: 22px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            margin-top: 40px;
+
+
+            .title-icon {
+                width: 100%;
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 0;
+                padding: 10px;
+
+                span {
+                    width: 64px;
+                    height: 64px;
+
+                    img {
+                        width: 52px;
+                    }
+                }
+            }
+
+            .wrapper-texts {
+                color: #f8f8f8;
+            }
+
+            .wrapper-texts p {
+                font-size: 14px;
+                color: #f1c40f;
+            }
+
+            @media screen and (max-width: 700px) {
+                width: 100%;
+                margin-top: 0;
+            }
+
+        }
+
+        #foods {
+            padding: 0;
+            margin-top: 80px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+
+            .header-foods {
+                display: flex;
+                align-items: center;
+                width: 100%;
+
+                span {
+                    color: #389c53;
+                    font-weight: bold;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        #cards-food {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #cart-summary {
+            margin-top: 20px;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            display: flex;
+            align-items: flex-end;
+            flex-direction: column;
+            border-top: 2px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section id="modal-cart">
+            <button id="close-cart">X</button>
+            <h1>Seu carrinho</h1>
+
+            <div id="cart-items"></div>
+
+            <div id="cart-summary">
+                <p><strong>Total:</strong> <span id="cart-total">R$ 0,00</span></p>
+
+                <button id="checkout-button">Finalizar pedido</button>
+            </div>
+        </section>
+
+        <section id="modal-checkout">
+            <div class="modal-content">
+                <button id="close-checkout">X</button>
+                <h2>Finalizar Pedido</h2>
+
+                <form id="checkout-form">
+                    <label for="payment-method">Forma de pagamento:</label>
+                    <select id="payment-method" required>
+                        <option value="" disabled selected>Escolha...</option>
+                        <option value="crédito">Cartão de crédito</option>
+                        <option value="débito">Cartão de débito</option>
+                        <option value="pix">Pix</option>
+                        <option value="dinheiro">Dinheiro</option>
+                    </select>
+
+                    <label for="client-name">Nome completo:</label>
+                    <input type="text" id="client-name" placeholder="Seu nome completo" required />
+
+                    <label for="client-address">Endereço de entrega:</label>
+                    <input type="text" id="client-address" placeholder="Rua, número, bairro..." required />
+
+                    <p><strong>Pagamento será feito na entrega.</strong></p>
+
+                    <button id="confirmar-checkout" type="button">Confirmar Pedido</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="modal-resumo">
+            <div class="modal-content">
+                <button id="close-resumo">X</button>
+                <h2>Resumo do Pedido</h2>
+
+                <div id="resumo-conteudo"></div>
+
+                <div class="resumo-buttons">
+                    <button id="confirmar-resumo">Confirmar Pedido</button>
+                    <button id="voltar-inicio">Voltar ao Início</button>
+                </div>
+            </div>
+        </section>
+
+
+        <header>
+            <h3>UNI Food</h3>
+
+            <ul>
+                <li><img src="./icons/home.svg" />Home</li>
+                <li><img src="./icons/favorite.svg" />Destaques</li>
+                <li id="open-cart"><img src="./icons/cart.svg" />Carrinho <span id="cart-count"
+                        class="cart-badge">0</span></li>
+                <li><img src="./icons/account.svg" />Contato</li>
+            </ul>
+        </header>
+
+        <section id="home">
+            <div class="cta-home">
+                <span>Delivery grátis até 5km</span>
+                <h1 class="title-cta">Fome bateu? A gente chega voando!</h1>
+                <p class="description-cta">Peça online e receba suas delícias quentinhas em até 30 minutos. Comida boa,
+                    rápida e sem sair do conforto da sua casa.</p>
+                <div class="actions-home">
+                    <button class="actions-menu">Cardápio</button>
+                    <button class="actions-order">Pedir agora</button>
+                </div>
+            </div>
+            <div class="wrapper-image">
+                <img src="./icons/MOTOBOY_HOME.png" />
+            </div>
+        </section>
+
+        <section id="characteristics">
+            <div class="card-characteristics">
+                <div class="title-icon">
+                    <div class="wrapper-texts">
+                        <h3>Entrega Rápida</h3>
+                        <p>Na sua porta em até 30 minutos!</p>
+                    </div>
+                    <span>
+                        <img src="./icons/delivery.svg" />
+                    </span>
+                </div>
+            </div>
+            <div class="card-characteristics">
+                <div class="title-icon">
+                    <div class="wrapper-texts">
+                        <h3>Comida Quentinha</h3>
+                        <p>Embalagens térmicas para manter o sabor e o calor.</p>
+                    </div>
+                    <span>
+                        <img src="./icons/food.svg" />
+                    </span>
+                </div>
+            </div>
+            <div class="card-characteristics">
+                <div class="title-icon">
+                    <div class="wrapper-texts">
+                        <h3>Pagamento Fácil</h3>
+                        <p>Pix, cartão ou dinheiro — você escolhe na entrega.</p>
+                    </div>
+                    <span>
+                        <img src="./icons/payment.svg" />
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <section id="foods">
+            <div class="header-foods">
+                <h2>Destaques do dia para você!</h2>
+            </div>
+            <div id="cards-food">
+                <div class="card">
+                    <div class="discount">30% OFF</div>
+                    <img src="https://img.cybercook.com.br/imagens/receitas/340/file-de-frango-grelhado-2.jpeg"
+                        alt="Frango Grelhado com Legumes">
+                    <div class="content">
+                        <p class="title">Frango Grelhado</p>
+                        <span class="description-item">Frango grelhado com legumes no vapor</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 36,00</span>
+                            <span class="price">R$ 25,20</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="discount">20% OFF</div>
+                    <img src="https://redefoodservice.com.br/wp-content/uploads/2023/07/Pizza-Quatro-Queijos.jpg"
+                        alt="Pizza Quatro Queijos">
+                    <div class="content">
+                        <p class="title">Pizza Quatro Queijos</p>
+                        <span class="description-item">Mussarela, gorgonzola, parmesão e catupiry</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 58,00</span>
+                            <span class="price">R$ 46,40</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="discount">25% OFF</div>
+                    <img src="https://www.receitasonline.com.br/wp-content/uploads/Batata-recheada-com-frango.jpg"
+                        alt="Batata Recheada">
+                    <div class="content">
+                        <p class="title">Batata Recheada</p>
+                        <span class="description-item">Carne moída com queijo e ervas</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 32,00</span>
+                            <span class="price">R$ 24,00</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="discount">15% OFF</div>
+                    <img src="https://p2.trrsf.com/image/fget/cf/1200/1200/middle/images.terra.com/2023/11/10/1873512978-tapioca-com-tomate-e-rucula.jpeg"
+                        alt="Tapioca Fitness">
+                    <div class="content">
+                        <p class="title">Tapioca Fitness</p>
+                        <span class="description-item">Ovo, queijo branco e tomate</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 22,00</span>
+                            <span class="price">R$ 18,70</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="discount">10% OFF</div>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMD0MaApVzJNpDpC8UyWUzMe5F1OEsv3AUpQ&s"
+                        alt="Suco Detox Verde">
+                    <div class="content">
+                        <p class="title">Suco Detox Verde</p>
+                        <span class="description-item">Couve, maçã, limão e gengibre</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 14,00</span>
+                            <span class="price">R$ 12,60</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="categories">
+            <div class="header-categories">
+                <h2>Categorias</h2>
+                <span>Mostrar tudo</span>
+            </div>
+            <div class="categories-items">
+                <span class="category-active" data-category="all">Tudo</span>
+                <span data-category="hamburguer">Hambúrguer</span>
+                <span data-category="pizza">Pizza</span>
+                <span data-category="doces">Doces</span>
+                <span data-category="suchi">Suchi</span>
+                <span data-category="bebidas">Bebidas</span>
+            </div>
+        </section>
+
+        <section id="all-foods">
+
+            <div id="cards-food">
+                <div class="card" data-category="hamburguer">
+                    <div class="discount">20% OFF</div>
+                    <img src="https://originalexperience.com.br/wp-content/uploads/2023/11/Revisitando-receitas-de-hamburgueres-classicos-e-seus-acompanhamentos.jpg"
+                        alt="Hambúrguer Clássico">
+                    <div class="content">
+                        <p class="title">Hambúrguer Clássico</p>
+                        <span class="description-item">Pão brioche, carne, queijo e alface</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 35,00</span>
+                            <span class="price">R$ 28,00</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+                <div class="card" data-category="hamburguer">
+                    <div class="discount">20% OFF</div>
+                    <img src="https://img.freepik.com/fotos-premium/burger-costeleta-dupla-queijo-cheddar-duplo-bacon-cebola-frita-picles-molho-e-pao-artesanal_524291-99.jpg"
+                        alt="Hambúrguer Duplo Bacon">
+                    <div class="content">
+                        <p class="title">Hambúrguer Duplo Bacon</p>
+                        <span class="description-item">Duas carnes, bacon e cheddar</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 42,00</span>
+                            <span class="price">R$ 33,60</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+                <div class="card" data-category="hamburguer">
+                    <div class="discount">20% OFF</div>
+                    <img src="https://s2.glbimg.com/J37rcGJSqqOBHXy7PtN1JGOCgww=/620x455/e.glbimg.com/og/ed/f/original/2020/09/03/bacon_burger_-_01.jpg"
+                        alt="Cheddar Burguer">
+                    <div class="content">
+                        <p class="title">Cheddar Burguer</p>
+                        <span class="description-item">Cheddar, carne e cebola crispy</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 38,00</span>
+                            <span class="price">R$ 30,40</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+
+                <!-- PIZZA -->
+                <div class="card" data-category="pizza">
+                    <div class="discount">20% OFF</div>
+                    <img src="https://swiftbr.vteximg.com.br/arquivos/618283-PIZZA-ARTESANAL-DE-CALABRESA-SWIFT_3.jpg"
+                        alt="Pizza de Calabresa">
+                    <div class="content">
+                        <p class="title">Pizza de Calabresa</p>
+                        <span class="description-item">Molho de tomate, calabresa e cebola</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 55,00</span>
+                            <span class="price">R$ 44,00</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+
+                <div class="card" data-category="pizza">
+                    <div class="discount">20% OFF</div>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1WmG1AftYWK4_gfpFAHPa6wZRKc6a6EZ4pw&s"
+                        alt="Pizza Marguerita">
+                    <div class="content">
+                        <p class="title">Pizza Marguerita</p>
+                        <span class="description-item">Molho, mussarela e manjericão</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 52,00</span>
+                            <span class="price">R$ 41,60</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+
+                <div class="card" data-category="pizza">
+                    <div class="discount">20% OFF</div>
+                    <img src="https://receitatodahora.com.br/wp-content/uploads/2024/08/pizza-portuguesa-0508-1200x900.jpg"
+                        alt="Pizza Portuguesa">
+                    <div class="content">
+                        <p class="title">Pizza Portuguesa</p>
+                        <span class="description-item">Presunto, ovos, ervilha e cebola</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 60,00</span>
+                            <span class="price">R$ 48,00</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+
+                <!-- DOCES -->
+                <div class="card" data-category="doces">
+                    <div class="discount">20% OFF</div>
+                    <img src="https://www.becel.com.br/-/media/Project/Upfield/Brands/Becel-NL/Becel-BR/Assets/Recipes/a93db78b-738f-4e26-b32c-f2a47a59993c.jpg?rev=90e50616ab064cb29693711c36c6d0e5"
+                        alt="Brownie de Chocolate">
+                    <div class="content">
+                        <p class="title">Brownie de Chocolate</p>
+                        <span class="description-item">Brownie com cobertura de chocolate</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 18,00</span>
+                            <span class="price">R$ 14,40</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+
+                <div class="card" data-category="doces">
+                    <div class="discount">20% OFF</div>
+                    <img src="https://bakeandcakegourmet.com.br/uploads/site/receitas/torta-de-limao-oonoewlj.jpg"
+                        alt="Torta de Limão">
+                    <div class="content">
+                        <p class="title">Torta de Limão</p>
+                        <span class="description-item">Base crocante e creme de limão</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 20,00</span>
+                            <span class="price">R$ 16,00</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+
+                <div class="card" data-category="doces">
+                    <div class="discount">20% OFF</div>
+                    <img src="https://cozinhaglobo.com.br/wp-content/uploads/2023/06/receita-de-cheesecake-de-morango.jpg"
+                        alt="Cheesecake de Morango">
+                    <div class="content">
+                        <p class="title">Cheesecake de Morango</p>
+                        <span class="description-item">Creme, geleia e biscoito</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 24,00</span>
+                            <span class="price">R$ 19,20</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+
+                <!-- SUCHI -->
+                <div class="card" data-category="suchi">
+                    <div class="discount">20% OFF</div>
+                    <img src="https://tanabatadelivery.com.br.atuali.com/images/stories/virtuemart/product/combo-20-pecas-salmao.jpg"
+                        alt="Combinado Sushi 20 peças">
+                    <div class="content">
+                        <p class="title">Combinado Sushi 20 peças</p>
+                        <span class="description-item">Salmão, arroz, nori e cream cheese</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 70,00</span>
+                            <span class="price">R$ 56,00</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+
+                <div class="card" data-category="suchi">
+                    <div class="discount">20% OFF</div>
+                    <img src="https://static.itdg.com.br/images/1200-675/774375583e3775acf3328a7c7a0a0470/303152-original.jpg"
+                        alt="Temaki de Salmão">
+                    <div class="content">
+                        <p class="title">Temaki de Salmão</p>
+                        <span class="description-item">Cone de salmão com arroz e nori</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 30,00</span>
+                            <span class="price">R$ 24,00</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+
+                <div class="card" data-category="suchi">
+                    <div class="discount">20% OFF</div>
+                    <img src="https://receitadaboa.com.br/wp-content/uploads/2024/10/Salmon-Carioquinha.jpg"
+                        alt="Hot Roll de Salmão">
+                    <div class="content">
+                        <p class="title">Hot Roll de Salmão</p>
+                        <span class="description-item">Rolinhos fritos recheados com salmão</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 32,00</span>
+                            <span class="price">R$ 25,60</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+
+                <!-- BEBIDAS -->
+                <div class="card" data-category="bebidas">
+                    <div class="discount">20% OFF</div>
+                    <img src="https://blogdapublicidade.com/wp-content/uploads/2024/04/historia-logotipo-coca-cola.jpg"
+                        alt="Coca-Cola 600ml">
+                    <div class="content">
+                        <p class="title">Coca-Cola 600ml</p>
+                        <span class="description-item">Bebida gaseificada gelada</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 8,00</span>
+                            <span class="price">R$ 6,40</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+
+                <div class="card" data-category="bebidas">
+                    <div class="discount">20% OFF</div>
+                    <img src="https://espaconatelie.com.br/wp-content/uploads/2024/09/suco-de-laranja-natural.jpg"
+                        alt="Suco Natural de Laranja">
+                    <div class="content">
+                        <p class="title">Suco Natural de Laranja</p>
+                        <span class="description-item">Suco 100% natural e fresco</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 10,00</span>
+                            <span class="price">R$ 8,00</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+
+                <div class="card" data-category="bebidas">
+                    <div class="discount">20% OFF</div>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCHQmEgxGx6iJiw75dJEZpPHJX8AiZzfqOjA&s"
+                        alt="Milkshake de Chocolate">
+                    <div class="content">
+                        <p class="title">Milkshake de Chocolate</p>
+                        <span class="description-item">Milkshake cremoso com sorvete</span>
+                        <div class="wrapper-prices">
+                            <span class="original-price">R$ 18,00</span>
+                            <span class="price">R$ 14,40</span>
+                        </div>
+                        <button class="add-to-cart">+ Adicionar ao carrinho</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+    </main>
+</body>
+
+<script src="./js/app.js" defer></script>
+
+
+</html>
